@@ -3,6 +3,12 @@ package ch2_linked_lists;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
+/**
+ * Linked in data structure implement
+ * @author weiqi
+ *
+ * @param <E>
+ */
 public class LinkedList<E> {
 	
 	private Node<E> head;
@@ -139,6 +145,8 @@ public class LinkedList<E> {
 		}
 	}
 	
+	/** Exercise Part **/
+	
 	/**
 	 * Method to remove the duplicate
 	 */
@@ -182,6 +190,51 @@ public class LinkedList<E> {
 		return pointer2.item;
 	}
 	
+	/**
+	 * Implement an algorithm to delete a node in the middle of a single linked list, 
+	 * given only access to that node.
+	 * mistake: return value (delete should return if deleted)
+	 * @param pointer
+	 */
+	public boolean delMiddle(Node<E> pointer){
+		if (pointer==null || pointer.next==null){
+			pointer=null;
+			return false;
+		} else {
+			pointer.item = pointer.next.item;
+			pointer.next = pointer.next.next;
+			return true;
+		}
+		
+	}
+	
+	/** !!!!!!!!!!!!!!!!!!
+	 * Using recursion to solve this
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	public Node<Integer> addition(int carry, Node<Integer> p1, Node<Integer> p2){
+		if(p1 == null && p2 == null){
+			return null;
+		}
+		Node<Integer> result = new Node(carry, null);
+		int value = carry;
+		value += (p1==null ? 0 : p1.item);
+		value += (p2==null ? 0 : p2.item);
+		result.item = value%10;
+		Node<Integer> nextResult = addition(value>=10? 1:0, 
+									p1==null?null:p1.next,
+									p2==null?null:p2.next);
+		
+		result.next = nextResult;
+		return result;
+	}
+	
+	/**
+	 * Simply test in main
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		LinkedList<String> nameList = new LinkedList<String>();
@@ -212,6 +265,28 @@ public class LinkedList<E> {
 		nameList2.removeDup();
 		System.out.println(nameList2);
 		
+		LinkedList<Integer> a = new LinkedList<Integer>(); // caution
+		LinkedList<Integer> b = new LinkedList<Integer>(); 
+		a.addFirst(3);
+		a.addFirst(5);
+		a.addFirst(1);
+		a.addFirst(3);
+		b.addFirst(2);
+		b.addFirst(9);
+		b.addFirst(5);
+		System.out.println(a);
+		System.out.println(b);
+
+		Node<Integer> p1 = a.head;
+		Node<Integer> p2 = b.head;
+		Node<Integer> result;
+		result = a.addition(0, p1, p2);
+		String s = result.item.toString();
+		while (result.next!=null){
+			s = s + "=>" + result.next.item.toString();
+			result = result.next;
+		}
+		System.out.println(s);
 		
 //		System.out.println(nameList.size());
 //

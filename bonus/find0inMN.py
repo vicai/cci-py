@@ -21,7 +21,7 @@ def changeZero(matrix):
 	return matrix
 
 def changeZero2(matrix):
-
+	for 
 
 
 def makeZero(matrix, i, j):
