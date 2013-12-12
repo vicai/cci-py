@@ -1,3 +1,5 @@
+package ch1;
+
 //public class oneToFour{
 //	public static void Main(){
 //		System.out.println(strAna("abc", "abc"));	
@@ -12,6 +14,7 @@
 //		}
 //		return true;
 //	}
+
 import java.util.HashMap;
 import java.util.Map;
 

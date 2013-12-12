@@ -1,0 +1,99 @@
+easy/intermediate
+What are closures in python?
+>>> def outer():
+...     x = 1
+...     def inner():
+...         print x # 1
+...     return inner
+>>> foo = outer()
+>>> foo.func_closure # doctest: +ELLIPSIS
+(<cell at 0x...: int object at 0x...>,)
+
+
+What are Python decorators and how would you use them?
+>>> def outer(some_func):
+...     def inner():
+...         print "before some_func"
+...         ret = some_func() # 1
+...         return ret + 1
+...     return inner
+>>> def foo():
+...     return 1
+>>> decorated = outer(foo) # 2
+>>> decorated()
+before some_func
+2
+They extend past python, and are functions that take a function as an argument and return functions. A simple example might be a decorator that takes a function, prints its args to stdout, prints the return value to stdout, then returns that return value. The syntax in Python is usually done with the @decorator_name above a function definition.
+
+
+How would you setup many projects where each one uses different versions of Python and third party libraries?
+virtualenv is a tool to create isolated Python environments.
+
+
+What is PEP8 and do you follow its guidelines when you're coding?
+A coding standard, and I try to. pylint is a great help.
+
+
+How are arguments passed – by reference of by value? (easy, but not that easy, I'm not sure if I can answer this clearly)
+
+
+Do you know what list and dict comprehensions are? Can you give an example?
+ways to construct a list or dict through an expression and an iterable.
+>>> x = [(a, a+1) for a in range(5)]
+>>> y = dict((a,b) for a,b in x)
+>>> x
+[(0, 1), (1, 2), (2, 3), (3, 4), (4, 5)]
+>>> y
+{0: 1, 1: 2, 2: 3, 3: 4, 4: 5}
+
+Show me three different ways of fetching every third item in the list
+[x for i, x in enumerate(thelist) if i%3 == 0]
+
+for i, x in enumerate(thelist):
+    if i % 3: continue
+	    yield x
+
+a = 0
+for x in thelist:
+	if a%3: continue
+		yield x
+		a += 1
+
+
+Do you know what is the difference between lists and tuples? Can you give me an example for their usage?
+Tuples are immutable. A tuple might be a good type for a coordinate inst var in some class. Lists are ordered collections, but with a tuple, each index generally has a certain meaning, so coord[0] is the x coordinate and coord[1] is y.
+
+
+Do you know the difference between range and xrange?
+Range returns a list of the full sequence while xrange generates each element iteratively like you would with the "yield" keyword. This changes in python3, and the default behavior is to yield like xrange. I think xrange is out.
+
+
+Tell me a few differences between Python 2.x and 3.x?
+The previous answer. print is no longer a statement and is just a function ("print 5" won't work anymore and you need parens), they added the Ellipse object (...). That's all I know off hand.
+
+The with statement and its usage.
+In python the with keyword is used when working with unmanaged resources (like file streams). It is similar to the with statement in VB.NET and 'using' C#. It allows you to ensure that a resource is "cleaned up" when the code that uses it finishes running, even if exceptions are thrown. It provides 'syntactic sugar' for try/finally blocks.
+
+How to avoid cyclical imports without having to resort to imports in functions?
+Refactoring your code? Not sure. When I've ran into this I generally have restructured functions into different modules which ended up cleaning everything anyway.
+
+
+what's wrong with import all?
+You can overwrite functions and this can be dangerous especially if you don't maintain that module.
+
+
+Why is the GIL important? (This actually puzzles me, don't know the answer)
+It has to do with preventing true multithreaded bytecode, and has been an issue forever. I think python bytecode execution is protected with the Global Interpreter Lock so every bc execution is atomic. Explained best here: http://wiki.python.org/moin/GlobalInterpreterLock
+
+What are "special" methods (<foo>), how they work, etc
+can you manipulate functions as first-class objects?
+the difference between "class Foo" and "class Foo(object)"
+tricky, smart ones
+how to read a 8GB file in python?
+what don't you like about Python?
+It's slow, and it can be too dynamic for certain tasks in my opinion. It is not compiled. It can be very unpredictable. People abuse the flexibility of it sometimes.
+
+
+can you convert ascii characters to an integer without using built in methods like string.atoi or int()? curious one
+subjective ones
+do you use tabs or spaces, which ones are better?
