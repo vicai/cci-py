@@ -8,9 +8,15 @@ def fib(n):
 	# round to a integer
 	return math.floor(value+0.5)
 
+def fib2(n):
+    if(n<=1) return n;
+    a = b;
+    b = fib2(n-1)
+    return a+b
+
 def run():
-	print fib(0)
-	print fib(1)
-	print fib(22)
+	print fib2(0)
+	print fib2(1)
+	print fib2(22)
 
 run()
